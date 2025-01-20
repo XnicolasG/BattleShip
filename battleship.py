@@ -34,3 +34,10 @@ class Ship:
             board[row][col] = self.name[0]
         self.positions = positions
         return True
+
+    def hit(self):
+        self.hits += 1
+        if self.hits == self.size:
+            print(f"el barco: {self.name} ha sido hundido !")        
+            return True
+        return False
