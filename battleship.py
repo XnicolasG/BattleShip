@@ -17,7 +17,7 @@ class Ship:
             if start_row + self.size > rows:
                 return False
         
-        # create variable to avoid handle directly the main property slef.postitons
+        # create variable to avoid handle directly the main property self.postitons
         positions = []
         # iterate the size of the ship to verify if the position is free
         for i in range(self.size):
@@ -41,3 +41,15 @@ class Ship:
             print(f"el barco: {self.name} ha sido hundido !")        
             return True
         return False
+
+class Destroyer(Ship):
+    def __init__(self):
+        super().__init__('Destructor', 2)
+
+class Submarine(Ship):
+    def __init__(self):
+        super().__init__('Submarino', 3)
+
+class Battlership(Ship):
+    def __init__(self):
+        super().__init__('Battleship', 4)
