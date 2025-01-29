@@ -50,6 +50,24 @@ class Submarine(Ship):
     def __init__(self):
         super().__init__('Submarino', 3)
 
-class Battlership(Ship):
+class Battleship(Ship):
     def __init__(self):
         super().__init__('Battleship', 4)
+
+class Player:
+    def __init__(self,name):
+        self.name = name
+        self.board = [['' for _ in range(10)] for _ in range(10)]
+        self.ships = []
+        self.hits = [['' for _ in range(10)] for _ in range(10)]
+    def place_boats(self):
+        destroyer = Destroyer()
+        submarine = Submarine()
+        battleship = Battleship()
+        
+        self.ships.extend([destroyer,submarine,battleship])
+        
+        for ship in self.ships:
+            direction = input(f'Choose the direction for {ship}, type "h" for horizontal or "v" for vertical: ').strip().lower()
+            row = int(input(f'Choose the initial row to place the ship {ship}')).strip()
+            column = int(input(f'Choose the initial column to place the ship {ship}')).strip()
