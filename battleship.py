@@ -60,6 +60,7 @@ class Player:
         self.board = [['' for _ in range(10)] for _ in range(10)]
         self.ships = []
         self.hits = [['' for _ in range(10)] for _ in range(10)]
+        
     def place_boats(self):
         destroyer = Destroyer()
         submarine = Submarine()
@@ -68,6 +69,18 @@ class Player:
         self.ships.extend([destroyer,submarine,battleship])
         
         for ship in self.ships:
-            direction = input(f'Choose the direction for {ship}, type "h" for horizontal or "v" for vertical: ').strip().lower()
-            row = int(input(f'Choose the initial row to place the ship {ship}')).strip()
-            column = int(input(f'Choose the initial column to place the ship {ship}')).strip()
+            direction_options = ["h", "v"]
+            placed = False
+            while not placed:
+                direction = input(f'Choose the direction for {ship}, type "h" for horizontal or "v" for vertical: ').strip().lower()
+                row = int(input(f'Choose the initial row to place the ship {ship}'))
+                column = int(input(f'Choose the initial column to place the ship {ship}'))
+                if direction not in direction_options:
+                    print('Please type "h" or "v" other input it is not allowed')
+                else:
+                    placed = ship.place_ship(self.board,column, row, direction)
+                
+                if not placed:
+                    print("remember board it's just 10x10, with those postion the ship does not fit on it")
+                
+                
