@@ -72,15 +72,44 @@ class Player:
             direction_options = ["h", "v"]
             placed = False
             while not placed:
-                direction = input(f'Choose the direction for {ship}, type "h" for horizontal or "v" for vertical: ').strip().lower()
-                row = int(input(f'Choose the initial row to place the ship {ship}'))
-                column = int(input(f'Choose the initial column to place the ship {ship}'))
+                direction = input(f'{self.name}, the size of this ship is {ship.size}, choose the direction for "{ship.name}" ship, type "h" for horizontal or "v" for vertical: ').strip().lower()
                 if direction not in direction_options:
                     print('Please type "h" or "v" other input it is not allowed')
                 else:
+                    row = int(input(f'{self.name}, choose the initial row to place the ship "{ship.name}" : '))
+                    column = int(input(f'{self.name},choose the initial column to place the ship "{ship.name}": '))
                     placed = ship.place_ship(self.board,column, row, direction)
+                    self.print_boats()       
+                    
                 
                 if not placed:
-                    print("remember board it's just 10x10, with those postion the ship does not fit on it")
+                    print("remember board it's just 10x10, with that postion the ship will not fit on it")
                 
-                
+    def print_boats(self):
+        for row in self.board:
+            print(' '.join(row))
+    
+    def attack(self, oponent):
+        valid = False
+        while not valid:
+            try:
+                row = int(input(f"Please select a row from 0 to 9 to attack"))           
+                column = int(input(f"Please select a column from 0 to 9 to attack"))  
+                if 0 <= row < 10 and 0 <= column < 10:
+                    valid = True 
+                else:
+                    print('Remember values can only be 0 to 9')  
+            except ValueError:    
+                print('Invalid input, Please enter a numeric value')
+        if oponent.board[row][column] != ' ':
+            print('HIT 💥')
+            self.hits[row][column] = '✅'      
+        else:
+            print(' Water 🌊')
+            self.hits[row][column] = '❌'      
+        
+
+player1 = Player('SrPizza')
+
+player1.place_boats()
+player1.print_boats()
